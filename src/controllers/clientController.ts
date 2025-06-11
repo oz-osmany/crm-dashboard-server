@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { db } from '../config/db';
 import jwt from 'jsonwebtoken';
 import { body } from 'express-validator';
-import { getAllClients, removeCLient } from '../models/clientModel';
+import { getAllClients, removeCLient, updateCliente } from '../models/clientModel';
 
 
 export const createClient = async (req: any, res: any) => {
@@ -31,8 +31,13 @@ export const getClients = async (req: Request, res: Response) => {
 
 export const deleteClient = async ( req:any, res: any ) => {
   const { id }=req.params;
-
   const result = await removeCLient( id );
   res.json({ message: 'Usuario eliminado',result})
   
+}
+export const updateClient = async ( req:any, res: any ) =>{
+  const  { name,email, phone, estatus, notes} = req.body;
+  const { id } =req.params;
+  const result = await updateCliente( name,email, phone, estatus, notes, id );
+  res.json({ message: 'Cliente actualizado' },result)
 }

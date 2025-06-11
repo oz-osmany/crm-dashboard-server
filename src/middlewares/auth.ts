@@ -15,10 +15,9 @@ interface JwtPayload {
 export const verifyToken = (req: any, res: any, next: NextFunction) => {
   const token = req.headers.authorization?.split(' ')[1];
   if (!token) return res.status(401).json({ message: 'Token no proporcionado' });  
-
+  
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload ;
-   
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload ;    
     req.userId = decoded.userId; // inyectamos el userId al body
     next();
   } catch (err) {

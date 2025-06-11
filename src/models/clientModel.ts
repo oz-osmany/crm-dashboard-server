@@ -17,3 +17,13 @@ export const removeCLient = async ( id: number ) => {
 
 }
 }
+
+export const updateCliente = async ( name:string, email: string, phone:string, status:string,notes: string, id: number ) => {
+    try {
+        // console.log(name);
+        const [result] = await db.query( 'UPDATE clients SET name=?, email=?, phone=?, status=?, notes=? WHERE id=?', [name, email, phone,status,notes, id] )
+        return result;
+    } catch (error) {
+        
+    }
+}
