@@ -8,10 +8,11 @@ import clientRoutes from './src/routes/clientRoutes';
 dotenv.config();
 
 const app = express();
+app.use(cors({ origin: 'http://localhost:5173' }));
+
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev')); // solo se activa en desarrollo
 }
-app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(express.json());
 
 
@@ -19,7 +20,7 @@ app.use('/api', userRoutes);
 app.use('/clients', clientRoutes);
 app.use('/auth/login', authRoutes);
 
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor backend corriendo en http://localhost:${PORT}`);
+const puerto = process.env.PORT
+app.listen( puerto, () => {
+  console.log(`Servidor backend corriendo en http://localhost:${puerto}`);
 });

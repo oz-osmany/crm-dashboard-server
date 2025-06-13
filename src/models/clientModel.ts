@@ -5,6 +5,12 @@ export const getAllClients = async ()=> {
     const [ res ] = await db.query( 'SELECT * FROM clients' );
     return res;
 }
+export const getClient = async ( id:number)=> {
+
+    const [ res ] = await db.query( 'SELECT * FROM clients WHERE id=?',[id] );
+    console.log(res)
+    return res;
+}
 
 export const removeCLient = async ( id: number ) => {
     try {

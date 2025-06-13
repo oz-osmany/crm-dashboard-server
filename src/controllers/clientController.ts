@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { db } from '../config/db';
 import jwt from 'jsonwebtoken';
 import { body } from 'express-validator';
-import { getAllClients, removeCLient, updateCliente } from '../models/clientModel';
+import { getAllClients, getClient, removeCLient, updateCliente } from '../models/clientModel';
 
 
 export const createClient = async (req: any, res: any) => {
@@ -25,6 +25,13 @@ export const createClient = async (req: any, res: any) => {
 };
 export const getClients = async (req: Request, res: Response) => {
   const clientes = await getAllClients();
+  res.json(clientes);
+  
+}
+export const getClientById = async (req: Request, res: Response) => {
+  const { id }=req.params;
+  const ids= parseInt( id);
+  const clientes = await getClient( ids );
   res.json(clientes);
   
 }
