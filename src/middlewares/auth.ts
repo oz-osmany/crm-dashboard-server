@@ -1,7 +1,6 @@
 // middlewares/auth.ts
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import { body } from 'express-validator';
 
 interface JwtPayload {
   userId: string;
